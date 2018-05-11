@@ -1,0 +1,17 @@
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\Steganography-WFA.exe.config
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\Steganography-WFA.exe
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\Steganography-WFA.pdb
+D:\C# Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.csprojResolveAssemblyReference.cache
+D:\C# Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography_WFA.Form1.resources
+D:\C# Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography_WFA.Properties.Resources.resources
+D:\C# Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.csproj.GenerateResource.Cache
+D:\C# Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.exe
+D:\C# Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.pdb
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.dll
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Imaging.dll
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Imaging.Formats.dll
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Math.dll
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.xml
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Imaging.xml
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Imaging.Formats.xml
+D:\C# Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Math.xml
