@@ -29,19 +29,26 @@
         private void InitializeComponent()
         {
             this.groupBoxHome = new System.Windows.Forms.GroupBox();
-            this.buttonHomeHideText = new System.Windows.Forms.Button();
             this.buttonHomeHideImage = new System.Windows.Forms.Button();
+            this.buttonHomeHideText = new System.Windows.Forms.Button();
             this.groupBoxHideText = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonBrowse = new System.Windows.Forms.Button();
-            this.textBoxHiddenText = new System.Windows.Forms.TextBox();
-            this.labelTextToHide = new System.Windows.Forms.Label();
+            this.buttonGenerateImage = new System.Windows.Forms.Button();
             this.groupBoxEncryption = new System.Windows.Forms.GroupBox();
             this.labelPass = new System.Windows.Forms.Label();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.encryptCheckBox = new System.Windows.Forms.CheckBox();
-            this.buttonGenerateImage = new System.Windows.Forms.Button();
+            this.labelTextToHide = new System.Windows.Forms.Label();
+            this.textBoxHiddenText = new System.Windows.Forms.TextBox();
+            this.buttonBrowse = new System.Windows.Forms.Button();
+            this.pictureBoxMainImg = new System.Windows.Forms.PictureBox();
             this.groupBoxHideImage = new System.Windows.Forms.GroupBox();
+            this.buttonSaveGeneratedImage = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pictureBoxResultImage = new System.Windows.Forms.PictureBox();
+            this.labelSelectHidden = new System.Windows.Forms.Label();
+            this.labelSelectMain = new System.Windows.Forms.Label();
+            this.buttonBrowseHidden = new System.Windows.Forms.Button();
+            this.pictureBoxHiddenImage = new System.Windows.Forms.PictureBox();
             this.buttonGenerateHiddenImage = new System.Windows.Forms.Button();
             this.groupBoxENcryptImage = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,22 +56,15 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.buttonBrowseMain = new System.Windows.Forms.Button();
             this.pictureBoxMainImage = new System.Windows.Forms.PictureBox();
-            this.pictureBoxHiddenImage = new System.Windows.Forms.PictureBox();
-            this.buttonBrowseHidden = new System.Windows.Forms.Button();
-            this.labelSelectMain = new System.Windows.Forms.Label();
-            this.labelSelectHidden = new System.Windows.Forms.Label();
-            this.pictureBoxResultImage = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.buttonSaveGeneratedImage = new System.Windows.Forms.Button();
             this.groupBoxHome.SuspendLayout();
             this.groupBoxHideText.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxEncryption.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainImg)).BeginInit();
             this.groupBoxHideImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResultImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHiddenImage)).BeginInit();
             this.groupBoxENcryptImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHiddenImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResultImage)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxHome
@@ -78,15 +78,6 @@
             this.groupBoxHome.TabStop = false;
             this.groupBoxHome.Text = "Home";
             // 
-            // buttonHomeHideText
-            // 
-            this.buttonHomeHideText.Location = new System.Drawing.Point(149, 339);
-            this.buttonHomeHideText.Name = "buttonHomeHideText";
-            this.buttonHomeHideText.Size = new System.Drawing.Size(201, 50);
-            this.buttonHomeHideText.TabIndex = 0;
-            this.buttonHomeHideText.Text = "Hide Text";
-            this.buttonHomeHideText.UseVisualStyleBackColor = true;
-            // 
             // buttonHomeHideImage
             // 
             this.buttonHomeHideImage.Location = new System.Drawing.Point(149, 436);
@@ -96,6 +87,15 @@
             this.buttonHomeHideImage.Text = "Hide Image";
             this.buttonHomeHideImage.UseVisualStyleBackColor = true;
             // 
+            // buttonHomeHideText
+            // 
+            this.buttonHomeHideText.Location = new System.Drawing.Point(149, 339);
+            this.buttonHomeHideText.Name = "buttonHomeHideText";
+            this.buttonHomeHideText.Size = new System.Drawing.Size(201, 50);
+            this.buttonHomeHideText.TabIndex = 0;
+            this.buttonHomeHideText.Text = "Hide Text";
+            this.buttonHomeHideText.UseVisualStyleBackColor = true;
+            // 
             // groupBoxHideText
             // 
             this.groupBoxHideText.Controls.Add(this.buttonGenerateImage);
@@ -103,7 +103,7 @@
             this.groupBoxHideText.Controls.Add(this.labelTextToHide);
             this.groupBoxHideText.Controls.Add(this.textBoxHiddenText);
             this.groupBoxHideText.Controls.Add(this.buttonBrowse);
-            this.groupBoxHideText.Controls.Add(this.pictureBox1);
+            this.groupBoxHideText.Controls.Add(this.pictureBoxMainImg);
             this.groupBoxHideText.Location = new System.Drawing.Point(529, 12);
             this.groupBoxHideText.Name = "groupBoxHideText";
             this.groupBoxHideText.Size = new System.Drawing.Size(501, 847);
@@ -111,41 +111,15 @@
             this.groupBoxHideText.TabStop = false;
             this.groupBoxHideText.Text = "Hide Text";
             // 
-            // pictureBox1
+            // buttonGenerateImage
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(115, 35);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(255, 237);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // buttonBrowse
-            // 
-            this.buttonBrowse.Location = new System.Drawing.Point(139, 288);
-            this.buttonBrowse.Name = "buttonBrowse";
-            this.buttonBrowse.Size = new System.Drawing.Size(201, 50);
-            this.buttonBrowse.TabIndex = 2;
-            this.buttonBrowse.Text = "Browse Image";
-            this.buttonBrowse.UseVisualStyleBackColor = true;
-            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
-            // 
-            // textBoxHiddenText
-            // 
-            this.textBoxHiddenText.Location = new System.Drawing.Point(115, 383);
-            this.textBoxHiddenText.Multiline = true;
-            this.textBoxHiddenText.Name = "textBoxHiddenText";
-            this.textBoxHiddenText.Size = new System.Drawing.Size(255, 237);
-            this.textBoxHiddenText.TabIndex = 3;
-            // 
-            // labelTextToHide
-            // 
-            this.labelTextToHide.AutoSize = true;
-            this.labelTextToHide.Location = new System.Drawing.Point(112, 358);
-            this.labelTextToHide.Name = "labelTextToHide";
-            this.labelTextToHide.Size = new System.Drawing.Size(90, 13);
-            this.labelTextToHide.TabIndex = 4;
-            this.labelTextToHide.Text = "Enter text to hide:";
+            this.buttonGenerateImage.Enabled = false;
+            this.buttonGenerateImage.Location = new System.Drawing.Point(139, 754);
+            this.buttonGenerateImage.Name = "buttonGenerateImage";
+            this.buttonGenerateImage.Size = new System.Drawing.Size(201, 50);
+            this.buttonGenerateImage.TabIndex = 11;
+            this.buttonGenerateImage.Text = "Generate Image";
+            this.buttonGenerateImage.UseVisualStyleBackColor = true;
             // 
             // groupBoxEncryption
             // 
@@ -189,14 +163,41 @@
             this.encryptCheckBox.Text = "Encrypted";
             this.encryptCheckBox.UseVisualStyleBackColor = true;
             // 
-            // buttonGenerateImage
+            // labelTextToHide
             // 
-            this.buttonGenerateImage.Location = new System.Drawing.Point(139, 754);
-            this.buttonGenerateImage.Name = "buttonGenerateImage";
-            this.buttonGenerateImage.Size = new System.Drawing.Size(201, 50);
-            this.buttonGenerateImage.TabIndex = 11;
-            this.buttonGenerateImage.Text = "Generate Image";
-            this.buttonGenerateImage.UseVisualStyleBackColor = true;
+            this.labelTextToHide.AutoSize = true;
+            this.labelTextToHide.Location = new System.Drawing.Point(112, 358);
+            this.labelTextToHide.Name = "labelTextToHide";
+            this.labelTextToHide.Size = new System.Drawing.Size(90, 13);
+            this.labelTextToHide.TabIndex = 4;
+            this.labelTextToHide.Text = "Enter text to hide:";
+            // 
+            // textBoxHiddenText
+            // 
+            this.textBoxHiddenText.Location = new System.Drawing.Point(115, 383);
+            this.textBoxHiddenText.Multiline = true;
+            this.textBoxHiddenText.Name = "textBoxHiddenText";
+            this.textBoxHiddenText.Size = new System.Drawing.Size(255, 237);
+            this.textBoxHiddenText.TabIndex = 3;
+            // 
+            // buttonBrowse
+            // 
+            this.buttonBrowse.Location = new System.Drawing.Point(139, 288);
+            this.buttonBrowse.Name = "buttonBrowse";
+            this.buttonBrowse.Size = new System.Drawing.Size(201, 50);
+            this.buttonBrowse.TabIndex = 2;
+            this.buttonBrowse.Text = "Browse Image";
+            this.buttonBrowse.UseVisualStyleBackColor = true;
+            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
+            // 
+            // pictureBoxMainImg
+            // 
+            this.pictureBoxMainImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxMainImg.Location = new System.Drawing.Point(115, 35);
+            this.pictureBoxMainImg.Name = "pictureBoxMainImg";
+            this.pictureBoxMainImg.Size = new System.Drawing.Size(255, 237);
+            this.pictureBoxMainImg.TabIndex = 0;
+            this.pictureBoxMainImg.TabStop = false;
             // 
             // groupBoxHideImage
             // 
@@ -217,6 +218,71 @@
             this.groupBoxHideImage.TabIndex = 12;
             this.groupBoxHideImage.TabStop = false;
             this.groupBoxHideImage.Text = "Hide Image";
+            // 
+            // buttonSaveGeneratedImage
+            // 
+            this.buttonSaveGeneratedImage.Location = new System.Drawing.Point(149, 754);
+            this.buttonSaveGeneratedImage.Name = "buttonSaveGeneratedImage";
+            this.buttonSaveGeneratedImage.Size = new System.Drawing.Size(201, 50);
+            this.buttonSaveGeneratedImage.TabIndex = 18;
+            this.buttonSaveGeneratedImage.Text = "Save new image";
+            this.buttonSaveGeneratedImage.UseVisualStyleBackColor = true;
+            this.buttonSaveGeneratedImage.Click += new System.EventHandler(this.buttonSaveGeneratedImage_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(232, 524);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Result";
+            // 
+            // pictureBoxResultImage
+            // 
+            this.pictureBoxResultImage.Location = new System.Drawing.Point(136, 540);
+            this.pictureBoxResultImage.Name = "pictureBoxResultImage";
+            this.pictureBoxResultImage.Size = new System.Drawing.Size(229, 208);
+            this.pictureBoxResultImage.TabIndex = 16;
+            this.pictureBoxResultImage.TabStop = false;
+            // 
+            // labelSelectHidden
+            // 
+            this.labelSelectHidden.AutoSize = true;
+            this.labelSelectHidden.Location = new System.Drawing.Point(294, 48);
+            this.labelSelectHidden.Name = "labelSelectHidden";
+            this.labelSelectHidden.Size = new System.Drawing.Size(130, 13);
+            this.labelSelectHidden.TabIndex = 15;
+            this.labelSelectHidden.Text = "Select image to be hidden";
+            // 
+            // labelSelectMain
+            // 
+            this.labelSelectMain.AutoSize = true;
+            this.labelSelectMain.Location = new System.Drawing.Point(88, 48);
+            this.labelSelectMain.Name = "labelSelectMain";
+            this.labelSelectMain.Size = new System.Drawing.Size(93, 13);
+            this.labelSelectMain.TabIndex = 14;
+            this.labelSelectMain.Text = "Select main image";
+            // 
+            // buttonBrowseHidden
+            // 
+            this.buttonBrowseHidden.Enabled = false;
+            this.buttonBrowseHidden.Location = new System.Drawing.Point(294, 278);
+            this.buttonBrowseHidden.Name = "buttonBrowseHidden";
+            this.buttonBrowseHidden.Size = new System.Drawing.Size(148, 42);
+            this.buttonBrowseHidden.TabIndex = 13;
+            this.buttonBrowseHidden.Text = "Browse";
+            this.buttonBrowseHidden.UseVisualStyleBackColor = true;
+            this.buttonBrowseHidden.Click += new System.EventHandler(this.buttonBrowseHidden_Click);
+            // 
+            // pictureBoxHiddenImage
+            // 
+            this.pictureBoxHiddenImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxHiddenImage.Location = new System.Drawing.Point(253, 64);
+            this.pictureBoxHiddenImage.Name = "pictureBoxHiddenImage";
+            this.pictureBoxHiddenImage.Size = new System.Drawing.Size(227, 208);
+            this.pictureBoxHiddenImage.TabIndex = 12;
+            this.pictureBoxHiddenImage.TabStop = false;
             // 
             // buttonGenerateHiddenImage
             // 
@@ -289,76 +355,11 @@
             this.pictureBoxMainImage.TabIndex = 0;
             this.pictureBoxMainImage.TabStop = false;
             // 
-            // pictureBoxHiddenImage
-            // 
-            this.pictureBoxHiddenImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxHiddenImage.Location = new System.Drawing.Point(253, 64);
-            this.pictureBoxHiddenImage.Name = "pictureBoxHiddenImage";
-            this.pictureBoxHiddenImage.Size = new System.Drawing.Size(227, 208);
-            this.pictureBoxHiddenImage.TabIndex = 12;
-            this.pictureBoxHiddenImage.TabStop = false;
-            // 
-            // buttonBrowseHidden
-            // 
-            this.buttonBrowseHidden.Enabled = false;
-            this.buttonBrowseHidden.Location = new System.Drawing.Point(294, 278);
-            this.buttonBrowseHidden.Name = "buttonBrowseHidden";
-            this.buttonBrowseHidden.Size = new System.Drawing.Size(148, 42);
-            this.buttonBrowseHidden.TabIndex = 13;
-            this.buttonBrowseHidden.Text = "Browse";
-            this.buttonBrowseHidden.UseVisualStyleBackColor = true;
-            this.buttonBrowseHidden.Click += new System.EventHandler(this.buttonBrowseHidden_Click);
-            // 
-            // labelSelectMain
-            // 
-            this.labelSelectMain.AutoSize = true;
-            this.labelSelectMain.Location = new System.Drawing.Point(88, 48);
-            this.labelSelectMain.Name = "labelSelectMain";
-            this.labelSelectMain.Size = new System.Drawing.Size(93, 13);
-            this.labelSelectMain.TabIndex = 14;
-            this.labelSelectMain.Text = "Select main image";
-            // 
-            // labelSelectHidden
-            // 
-            this.labelSelectHidden.AutoSize = true;
-            this.labelSelectHidden.Location = new System.Drawing.Point(294, 48);
-            this.labelSelectHidden.Name = "labelSelectHidden";
-            this.labelSelectHidden.Size = new System.Drawing.Size(130, 13);
-            this.labelSelectHidden.TabIndex = 15;
-            this.labelSelectHidden.Text = "Select image to be hidden";
-            // 
-            // pictureBoxResultImage
-            // 
-            this.pictureBoxResultImage.Location = new System.Drawing.Point(136, 540);
-            this.pictureBoxResultImage.Name = "pictureBoxResultImage";
-            this.pictureBoxResultImage.Size = new System.Drawing.Size(229, 208);
-            this.pictureBoxResultImage.TabIndex = 16;
-            this.pictureBoxResultImage.TabStop = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(232, 524);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Result";
-            // 
-            // buttonSaveGeneratedImage
-            // 
-            this.buttonSaveGeneratedImage.Location = new System.Drawing.Point(149, 754);
-            this.buttonSaveGeneratedImage.Name = "buttonSaveGeneratedImage";
-            this.buttonSaveGeneratedImage.Size = new System.Drawing.Size(201, 50);
-            this.buttonSaveGeneratedImage.TabIndex = 18;
-            this.buttonSaveGeneratedImage.Text = "Save new image";
-            this.buttonSaveGeneratedImage.UseVisualStyleBackColor = true;
-            this.buttonSaveGeneratedImage.Click += new System.EventHandler(this.buttonSaveGeneratedImage_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1803, 992);
+            this.ClientSize = new System.Drawing.Size(1965, 992);
             this.Controls.Add(this.groupBoxHideImage);
             this.Controls.Add(this.groupBoxHideText);
             this.Controls.Add(this.groupBoxHome);
@@ -367,16 +368,16 @@
             this.groupBoxHome.ResumeLayout(false);
             this.groupBoxHideText.ResumeLayout(false);
             this.groupBoxHideText.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBoxEncryption.ResumeLayout(false);
             this.groupBoxEncryption.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainImg)).EndInit();
             this.groupBoxHideImage.ResumeLayout(false);
             this.groupBoxHideImage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResultImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHiddenImage)).EndInit();
             this.groupBoxENcryptImage.ResumeLayout(false);
             this.groupBoxENcryptImage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHiddenImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResultImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -395,7 +396,7 @@
         private System.Windows.Forms.Label labelTextToHide;
         private System.Windows.Forms.TextBox textBoxHiddenText;
         private System.Windows.Forms.Button buttonBrowse;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxMainImg;
         private System.Windows.Forms.GroupBox groupBoxHideImage;
         private System.Windows.Forms.Button buttonSaveGeneratedImage;
         private System.Windows.Forms.Label label5;

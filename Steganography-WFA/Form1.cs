@@ -19,6 +19,12 @@ namespace Steganography_WFA
             InitializeComponent();
         }
 
+        public enum State
+        {
+            Hiding,
+            Filling_With_Zeros
+        };
+
         private void buttonBrowseMain_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -32,7 +38,13 @@ namespace Steganography_WFA
 
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
-
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |Png Image (.png)|*.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxMainImg.ImageLocation = ofd.FileName;
+                buttonGenerateImage.Enabled = true;
+            }
         }
 
         private void buttonBrowseHidden_Click(object sender, EventArgs e)
@@ -63,6 +75,95 @@ namespace Steganography_WFA
             }
 
             return bitmap;
+        }
+
+        private static Bitmap embedText(string text, Bitmap bmp)
+        {
+            State state = State.Hiding;
+
+            int charIndex = 0;
+            int charValue = 0;
+
+            long pixelelementIndex = 0;
+
+            int zeros = 0;
+
+            int R, G, B = 0;
+
+            for(int i=0; i < bmp.Height; i++)
+            {
+                for(int j=0; j<bmp.Width; j++)
+                {
+                    Color pixel = bmp.GetPixel(j, i);
+
+                    R = pixel.R - pixel.R % 2;
+                    G = pixel.G - pixel.G % 2;
+                    B = pixel.B - pixel.B % 2;
+
+                    for(int n=0; n<3; n++)
+                    {
+                        if(pixelelementIndex % 8 == 0)
+                        {
+                            if(state == State.Filling_With_Zeros && zeros == 8)
+                            {
+                                if((pixelelementIndex -1) % 3 < 2)
+                                {
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
+                                }
+
+                                return bmp;
+                            }
+
+                            if(charIndex >= text.Length)
+                            {
+                                state = State.Filling_With_Zeros;
+                            } else
+                            {
+                                charValue = text[charIndex++];
+                            }
+                        }
+
+                        switch (pixelelementIndex % 3)
+                        {
+                            case 0:
+                                {
+                                    if(state == State.Hiding)
+                                    {
+                                        R += charValue % 2;
+                                        charValue /= 2;
+                                    }
+                                } break;
+
+                            case 1:
+                                {
+                                    if (state == State.Hiding)
+                                    {
+                                        G += charValue % 2;
+                                        charValue /= 2;
+                                    }
+                                } break;
+
+                            case 3:
+                                {
+                                    if (state == State.Hiding)
+                                    {
+                                        B += charValue % 2;
+                                        charValue /= 2;
+                                    }
+                                }break;
+                        }
+
+                        pixelelementIndex++;
+
+                        if(state == State.Filling_With_Zeros)
+                        {
+                            zeros++;
+                        }
+                    }
+                }
+            }
+
+            return bmp;
         }
 
         private void buttonGenerateHiddenImage_Click(object sender, EventArgs e)
@@ -164,5 +265,6 @@ namespace Steganography_WFA
                 pictureBoxResultImage.Image.Save(sfd.FileName);
             }
         }
+        
     }
 }
