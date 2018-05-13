@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,10 +26,13 @@ namespace Steganography_WFA
             Filling_With_Zeros
         };
 
+        private Bitmap bitmap = null;
+        private string extractedText = string.Empty;
+
         private void buttonBrowseMain_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |Png Image (.png)|*.png";
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
             if(ofd.ShowDialog() == DialogResult.OK)
             {
                 pictureBoxMainImage.ImageLocation = ofd.FileName;
@@ -39,7 +43,7 @@ namespace Steganography_WFA
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |Png Image (.png)|*.png";
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pictureBoxMainImg.ImageLocation = ofd.FileName;
@@ -50,7 +54,7 @@ namespace Steganography_WFA
         private void buttonBrowseHidden_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |Png Image (.png)|*.png";
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 Bitmap img = new Bitmap(ofd.FileName);
@@ -143,13 +147,14 @@ namespace Steganography_WFA
                                     }
                                 } break;
 
-                            case 3:
+                            case 2:
                                 {
                                     if (state == State.Hiding)
                                     {
                                         B += charValue % 2;
                                         charValue /= 2;
                                     }
+                                    bmp.SetPixel(j, i, Color.FromArgb(R, G, B));
                                 }break;
                         }
 
@@ -265,6 +270,199 @@ namespace Steganography_WFA
                 pictureBoxResultImage.Image.Save(sfd.FileName);
             }
         }
-        
+
+        private void buttonBrowseDecrypt_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|JPG Image (.jpg)|*.jpg|Png Image (.png)|*.png ";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureDecryptImg.ImageLocation = ofd.FileName;
+            }
+        }
+
+        private void buttonGenerateDecrypted_Click(object sender, EventArgs e)
+        {
+            Bitmap EncryptedImage = (Bitmap)pictureDecryptImg.Image;
+            Bitmap hiddenImage = new Bitmap(EncryptedImage.Width, EncryptedImage.Height);
+
+            byte[] BitsToDecrypt = new byte[8];
+            byte[] AlphaBits;
+            byte[] RedBits;
+            byte[] GreenBits;
+            byte[] BlueBits;
+
+            byte newGrey = 0;
+
+            Color pixelToDecrypt = new Color();
+
+            for(int i=0; i < EncryptedImage.Height; i++)
+            {
+                for (int j=0; j < EncryptedImage.Width; j++)
+                {
+                    pixelToDecrypt = EncryptedImage.GetPixel(j, i);
+
+                    AlphaBits = getBits((byte)pixelToDecrypt.A);
+                    RedBits = getBits((byte)pixelToDecrypt.R);
+                    GreenBits = getBits((byte)pixelToDecrypt.G);
+                    BlueBits = getBits((byte)pixelToDecrypt.B);
+
+                    BitsToDecrypt[0] = AlphaBits[6];
+                    BitsToDecrypt[1] = AlphaBits[7];
+                    BitsToDecrypt[0] = AlphaBits[6];
+                    BitsToDecrypt[1] = AlphaBits[7];
+                    BitsToDecrypt[2] = RedBits[6];
+                    BitsToDecrypt[3] = RedBits[7];
+                    BitsToDecrypt[4] = GreenBits[6];
+                    BitsToDecrypt[5] = GreenBits[7];
+                    BitsToDecrypt[6] = BlueBits[6];
+                    BitsToDecrypt[7] = BlueBits[7];
+
+                    newGrey = getByte(BitsToDecrypt);
+
+                    pixelToDecrypt = Color.FromArgb(newGrey, newGrey, newGrey);
+
+                    hiddenImage.SetPixel(j, i, pixelToDecrypt);
+                }
+
+            }
+
+            pictureBoxExtractedImg.Image = hiddenImage;
+            buttonSaveExtracted.Enabled = true;
+        }
+
+        private void buttonSaveExtracted_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png ";
+
+            if(sfd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxExtractedImg.Image.Save(sfd.FileName);
+            }
+        }
+
+        private void browseExtractText_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxExtractTextImg.ImageLocation = ofd.FileName;
+                buttonExtractText.Enabled = true;
+            }
+        }
+
+        private static string extractText(Bitmap bmp)
+        {
+            int ColorUnitIndex = 0;
+            int charValue = 0;
+
+            string extractedText = String.Empty;
+
+            for(int i=0; i< bmp.Height; i++)
+            {
+                for(int j=0; j<bmp.Width; j++)
+                {
+                    Color pixel = bmp.GetPixel(j, i);
+
+                    for (int n=0; n<3; n++)
+                    {
+                        switch(ColorUnitIndex %3)
+                        {
+                            case 0:
+                                {
+                                    charValue = charValue * 2 + pixel.R % 2;
+                                }break;
+
+                            case 1:
+                                {
+                                    charValue = charValue * 2 + pixel.G % 2;
+                                }break;
+
+                            case 2:
+                                {
+                                    charValue = charValue * 2 + pixel.B % 2;
+                                }break;
+                        }
+
+                        ColorUnitIndex++;
+                    }
+
+                    if(ColorUnitIndex % 8 == 0)
+                    {
+                        charValue = reverseBtis(charValue);
+
+                        if (charValue == 0)
+                        {
+                            return extractedText;
+                        }
+
+                        char c = (char)charValue;
+
+                        extractedText += c.ToString();
+                    }
+                }
+            }
+
+            return extractedText;
+        }
+
+        private static int reverseBtis(int n)
+        {
+            int result = 0;
+
+            for(int i=0; i < 8; i++)
+            {
+                result = result * 2 + n % 2;
+
+                n /= 2;
+            }
+
+            return result;
+        }
+
+        private void buttonExtractText_Click(object sender, EventArgs e)
+        {
+            
+            bitmap = (Bitmap)pictureBoxExtractTextImg.Image;
+
+            string extractedText = extractText(bitmap);
+
+            textBoxExtractedText.Text = extractedText;
+        }
+
+        private void buttonGenerateImage_Click(object sender, EventArgs e)
+        {
+            bitmap = (Bitmap)pictureBoxMainImg.Image;
+            string text = textBoxHiddenText.Text;
+
+            bitmap = embedText(text, bitmap);
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Bitmap Image (.bmp)|*.bmp";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                switch (sfd.FilterIndex)
+                {
+                    case 0:
+                        {
+                            bitmap.Save(sfd.FileName, ImageFormat.Png);
+                        }
+                        break;
+                    case 1:
+                        {
+                            bitmap.Save(sfd.FileName, ImageFormat.Bmp);
+                        }
+                        break;
+                }
+            }
+
+
+        }
+
+       
     }
 }
