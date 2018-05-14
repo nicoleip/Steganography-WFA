@@ -24,10 +24,10 @@ D:\Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Imaging.xml
 D:\Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Imaging.Formats.xml
 D:\Projects\Steganography-WFA\Steganography-WFA\bin\Debug\AForge.Math.xml
 D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.csprojAssemblyReference.cache
-D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography_WFA.Form1.resources
 D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography_WFA.Properties.Resources.resources
 D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.csproj.GenerateResource.cache
 D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.csproj.CoreCompileInputs.cache
 D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.csproj.CopyComplete
 D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.exe
 D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography-WFA.pdb
+D:\Projects\Steganography-WFA\Steganography-WFA\obj\Debug\Steganography_WFA.Steganography.resources
