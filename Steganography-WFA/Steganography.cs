@@ -11,140 +11,203 @@ namespace Steganography_WFA
         public Steganography()
         {
             InitializeComponent();
+
+            panel4.Height = button1.Height;
+            panel4.Top = button1.Top;
+
+            groupBox1.Visible = true;            
         }        
 
-        private void buttonBrowseMain_Click(object sender, EventArgs e)
+      
+        /// HIDE TEXT ///
+
+        private void btnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                pictureBoxMainImage.ImageLocation = ofd.FileName;
-                buttonBrowseHidden.Enabled = true;
+                pictureBoxImg.ImageLocation = ofd.FileName;
+                btnHideText.Enabled = true;
             }
         }
 
-        private void buttonBrowse_Click(object sender, EventArgs e)
+        private void btnHideText_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBoxMainImg.ImageLocation = ofd.FileName;
-                buttonGenerateImage.Enabled = true;
-            }
-        }
-
-        private void buttonBrowseHidden_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                Bitmap img = new Bitmap(ofd.FileName);
-                pictureBoxHiddenImage.Image = SteganographyHelperImage.toGrayscale(img);
-            }
-        }       
-
-        private void buttonGenerateHiddenImage_Click(object sender, EventArgs e)
-        {
-            Bitmap mainImage = new Bitmap(pictureBoxMainImage.Image);
-            Bitmap hiddenImage = new Bitmap(pictureBoxHiddenImage.Image);
-
-            mainImage = SteganographyHelperImage.encryptImage(mainImage, hiddenImage);
-
-            pictureBoxResultImage.Image = mainImage;
-
-        }       
-
-        private void buttonSaveGeneratedImage_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Bitmap Image (.bnp)|*.bmp";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBoxResultImage.Image.Save(sfd.FileName);
-            }
-        }
-
-        private void buttonBrowseDecrypt_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|JPG Image (.jpg)|*.jpg|Png Image (.png)|*.png ";
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                pictureDecryptImg.ImageLocation = ofd.FileName;
-            }
-        }
-
-        private void buttonGenerateDecrypted_Click(object sender, EventArgs e)
-        {
-            Bitmap EncryptedImage = (Bitmap)pictureDecryptImg.Image;
-            Bitmap hiddenImage = new Bitmap(EncryptedImage.Width, EncryptedImage.Height);
-
-            hiddenImage = SteganographyHelperImage.decryptImage(EncryptedImage, hiddenImage);
-
-            pictureBoxExtractedImg.Image = hiddenImage;
-            buttonSaveExtracted.Enabled = true;
-        }
-
-        private void buttonSaveExtracted_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png ";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBoxExtractedImg.Image.Save(sfd.FileName);
-            }
-        }
-
-        private void browseExtractText_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBoxExtractTextImg.ImageLocation = ofd.FileName;
-                buttonExtractText.Enabled = true;
-            }
-        }           
-
-        private void buttonExtractText_Click(object sender, EventArgs e)
-        {
-
-            Bitmap bmp = (Bitmap)pictureBoxMainImg.Image;
-
-            string extractedText = SteganographyHelperText.extractText(bmp);
-
-            textBoxExtractedText.Text = extractedText;
-        }
-
-        private void buttonGenerateImage_Click(object sender, EventArgs e)
-        {
-            Bitmap bmp = (Bitmap)pictureBoxMainImg.Image;
+            Bitmap bmp = (Bitmap)pictureBoxImg.Image;
             string text = textBoxHiddenText.Text;
 
             bmp = SteganographyHelperText.embedText(text, bmp);
 
-            pictureBoxMainImg.Image = bmp;
+            pictureBoxImg.Image = bmp;
 
-            button1.Enabled = true;
+            btnSave.Enabled = true;
 
             MessageBox.Show("Your text was hidden in the image successfully!", "Done");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Bitmap Image (.bmp)|*.bmp";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                pictureBoxMainImg.Image.Save(sfd.FileName, ImageFormat.Bmp);
+                pictureBoxImg.Image.Save(sfd.FileName, ImageFormat.Bmp);
             }
+        }
+
+
+
+        /// HIDE IMAGE ///
+
+        private void btnBrowseOrig_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxImgOrig.ImageLocation = ofd.FileName;
+                buttonBrowseHidden.Enabled = true;
+            }
+        }
+
+        private void buttonBrowseHidden_Click_1(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                Bitmap img = new Bitmap(ofd.FileName);
+                pictureBoxImgHidden.Image = SteganographyHelperImage.toGrayscale(img);
+            }
+
+            btnGenerate.Enabled = true;
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            Bitmap mainImage = new Bitmap(pictureBoxImgOrig.Image);
+            Bitmap hiddenImage = new Bitmap(pictureBoxImgHidden.Image);
+
+            mainImage = SteganographyHelperImage.encryptImage(mainImage, hiddenImage);
+
+            pictureBoxResult.Image = mainImage;
+
+            btnSaveHidden.Enabled = true;
+        }
+
+        private void btnSaveHidden_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Bitmap Image (.bmp)|*.bmp";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxResult.Image.Save(sfd.FileName);
+            }
+        }
+
+        /// EXTRACT TEXT
+        
+
+        private void btnBrowseHiddenText_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif |JPEG Image (.jpeg)|*.jpeg |JPG Image (.jpg)|*.jpg |Png Image (.png)|*.png";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxHiddenText.ImageLocation = ofd.FileName;
+                btnExtractText.Enabled = true;
+            }
+        }
+
+        private void btnExtractText_Click(object sender, EventArgs e)
+        {
+            Bitmap bmp = (Bitmap)pictureBoxHiddenText.Image;
+
+            string extractedText = SteganographyHelperText.extractText(bmp);
+
+            textBoxExtractedText.Text = extractedText;
+        }
+
+
+        
+        ///EXTRACT IMAGE
+       
+        private void btnBrowseHiddenImg_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|JPG Image (.jpg)|*.jpg|Png Image (.png)|*.png ";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxEncrypted.ImageLocation = ofd.FileName;
+            }
+
+            btnExtractImg.Enabled = true;
+        }
+
+        private void btnExtractImg_Click(object sender, EventArgs e)
+        {
+            Bitmap EncryptedImage = (Bitmap)pictureBoxEncrypted.Image;
+            Bitmap hiddenImage = new Bitmap(EncryptedImage.Width, EncryptedImage.Height);
+
+            hiddenImage = SteganographyHelperImage.decryptImage(EncryptedImage, hiddenImage);
+
+            pictureBoxExtracted.Image = hiddenImage;
+            btnSaveHiddenImg.Enabled = true;
+        }
+
+        private void btnSaveHiddenImg_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Bitmap Image (.bmp)|*.bmp|Gif Image (.gif)|*.gif|JPEG Image (.jpeg)|*.jpeg|Png Image (.png)|*.png ";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxExtracted.Image.Save(sfd.FileName);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            panel4.Top = button2.Top;
+
+            groupBox1.Visible = false;
+            groupBox2.Visible = true;
+            groupBox3.Visible = false;
+            groupBox4.Visible = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            panel4.Top = button1.Top;
+
+            groupBox1.Visible = true;
+            groupBox2.Visible = false;
+            groupBox3.Visible = false;
+            groupBox4.Visible = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            panel4.Top = button3.Top;
+
+            groupBox1.Visible = false;
+            groupBox2.Visible = false;
+            groupBox3.Visible = true;
+            groupBox4.Visible = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            panel4.Top = button4.Top;
+
+            groupBox1.Visible = false;
+            groupBox2.Visible = false;
+            groupBox3.Visible = false;
+            groupBox4.Visible = true;
         }
     }
 }
